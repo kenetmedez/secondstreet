@@ -3,6 +3,7 @@ import React from "react";
 export default function Header() {
   return (
     <section
+      className="z-0"
       style={{
         height: "100vh",
         display: "flex",

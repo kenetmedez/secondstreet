@@ -5,6 +5,7 @@ export interface NavigationProps {
 
 export const navigations: NavigationProps[] = [
   { title: "Home", link: "/" },
+  { title: "Blog", link: "/blogs" },
   { title: "Member", link: "/member" },
   { title: "About", link: "/about" },
   { title: "Contact", link: "/contact" },

@@ -6,38 +6,12 @@ import { navigations } from "../lib/navigation";
 export default function Navigation() {
   return (
     <nav
-      className={``}
-      style={{
-        backgroundColor: `black`,
-        width: "100%",
-        position: "fixed",
-        display: "top-0",
-      }}
+      className={`fixed top-0 z-50 bg-transparent w-full max-w-[1280px] mx-auto h-[40px] flex items-center justify-center`}
     >
       {navigations && navigations.length > 1 ? (
-        <div
-          className="w-full flex max-w-[1280px] mx-auto"
-          style={{
-            maxWidth: "1280px",
-            margin: "0 auto",
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
+        <div className="w-full flex max-w-[1280px] mx-auto flex-row items-center justify-center gap-10">
           {navigations?.map((nav, idx) => (
-            <Link
-              key={idx}
-              href={nav?.link}
-              className=""
-              style={{
-                listStyle: "none",
-                padding: "0 20px",
-                textDecoration: "none",
-                textTransform: "uppercase",
-              }}
-            >
+            <Link key={idx} href={nav?.link} className="uppercase">
               {nav?.title}
             </Link>
           ))}

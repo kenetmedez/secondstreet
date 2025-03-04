@@ -1,26 +1,39 @@
 import React from "react";
+import Heading from "../ui/heading";
+import Text from "../ui/text";
 
-export default function Header() {
+interface HeaderProps {
+  image?: string;
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  btn?: string;
+  style?: string;
+}
+
+export default function Header({
+  image,
+  title,
+  subtitle,
+  description,
+  btn,
+  style,
+}: HeaderProps) {
   return (
     <section
+      className=""
       style={{
-        height: "600px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "black",
+        backgroundImage: `url(${image})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <h1
-        style={{
-          textTransform: "uppercase",
-          color: "yellow",
-          fontSize: "100px",
-          textAlign: "center",
-        }}
-      >
-        coming soon
-      </h1>
+      <div className={style}>
+        <Heading style={style} heading={title} />
+        {subtitle && <span className="">{subtitle}</span>}
+        {description && <Text text={description} />}
+      </div>
+      {btn && <div>{btn}</div>}
     </section>
   );
 }

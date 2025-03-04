@@ -3,37 +3,16 @@ import Heading from "../ui/heading";
 import Text from "../ui/text";
 
 interface HeaderProps {
-  image?: string;
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  btn?: string;
-  style?: string;
+  heading?: string;
 }
 
-export default function Header({
-  image,
-  title,
-  subtitle,
-  description,
-  btn,
-  style,
-}: HeaderProps) {
+export default function Header({ heading }: HeaderProps) {
   return (
-    <section
-      className=""
-      style={{
-        backgroundImage: `url(${image})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <div className={style}>
-        <Heading style={style} heading={title} />
-        {subtitle && <span className="">{subtitle}</span>}
-        {description && <Text text={description} />}
+    <section className="w-full h-[656px] flex items-center justify-center bg-black">
+      <div>
+        <Heading className="uppercase">{heading}</Heading>
+        <Text></Text>
       </div>
-      {btn && <div>{btn}</div>}
     </section>
   );
 }

@@ -1,18 +1,34 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 import { IoReorderThreeOutline } from "react-icons/io5";
 
 import { navigations } from "../lib/navigation";
 
 export default function Navigation() {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 150) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
     <nav
-      className={`fixed top-0 z-[999] w-full max-w-[1280px] mx-auto h-[40px] flex items-center justify-center`}
+      className={`fixed ${scrolled ? "bg-black/80 py-8" : "bg-transparent py-8"} top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out`}
     >
       {navigations && navigations.length > 1 ? (
-        <div className="w-full flex max-w-[1280px] mx-auto flex-row items-center justify-center py-4">
+        <div className="w-full flex max-w-[1280px] mx-auto flex-row items-center justify-center">
           <div className="md:w-1/4 w-full flex items-center justify-center px-2">
             <span className="lg:text-3xl text-xl text-yellow-500 text-center">
               second street

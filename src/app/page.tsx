@@ -6,6 +6,7 @@ export default function Home() {
     <section>
       <Navigation />
       <Header heading="Coming Soon" />
+      <Header heading="Coming Soon" />
     </section>
   );
 }

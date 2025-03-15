@@ -2,7 +2,8 @@
 
 @theme {
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-lobster: var(--font-lobster);
+  --font-spicy: var(--font-spicy);
 }
 
 :root {

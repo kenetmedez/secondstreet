@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Lobster, Spicy_Rice } from "next/font/google";
+import { Geist, Lobster, Spicy_Rice, Rock_Salt } from "next/font/google";
 import "../../styles/globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const rock = Rock_Salt({
+  variable: "--font-rock",
   subsets: ["latin"],
+  weight: "400",
 });
 
 const lobster = Lobster({
@@ -36,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${lobster.variable} ${spicy.variable} antialiased`}
+        className={`${rock.variable} ${lobster.variable} ${spicy.variable} antialiased`}
       >
         {children}
       </body>

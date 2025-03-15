@@ -9,17 +9,30 @@ interface HeaderProps {
 
 export default function Header({ heading }: HeaderProps) {
   return (
-    <section className="w-full relative h-[556px] flex items-center justify-center">
+    <section className="w-full relative md:h-screen h-[300px] flex items-center justify-center">
       <div className="absolute h-full w-full z-10 bg-black/80" />
-      <Image
+      <iframe
+        width="1024"
+        height="800"
+        src="https://www.youtube.com/embed/nM3WLF-O_Qs?autoplay=1&mute=1&playsinline=1&modestbranding=1&showinfo=0&controls=0&disablekb=1&rel=0&start=18"
+        title="Second Street Video Player"
+        frameBorder="0"
+        allow="autoplay; encrypted-media;"
+        // referrerpolicy="strict-origin-when-cross-origin"
+        allowFullScreen
+        className="absolute w-full h-full object-cover"
+      />
+
+      {/* <Image
         src="/assets/sample.jpeg"
         width={800}
         height={500}
         alt="second street hero"
         className="absolute w-full h-full object-cover"
-      />
+      /> */}
+
       <div className="z-50">
-        <Heading className="uppercase">{heading}</Heading>
+        <Heading className="uppercase font-rock">{heading}</Heading>
         <Text></Text>
       </div>
     </section>

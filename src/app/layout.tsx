@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Lobster, Spicy_Rice, Rock_Salt } from "next/font/google";
+import { Lobster, Spicy_Rice, Rock_Salt } from "next/font/google";
 import "../../styles/globals.css";
 
 const rock = Rock_Salt({

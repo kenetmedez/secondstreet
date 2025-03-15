@@ -1,7 +1,7 @@
 import React from "react";
 import Heading from "../ui/heading";
 import Text from "../ui/text";
-import Image from "next/image";
+// import Image from "next/image";
 
 interface HeaderProps {
   heading?: string;

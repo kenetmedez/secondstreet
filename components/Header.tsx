@@ -9,7 +9,7 @@ interface HeaderProps {
 
 export default function Header({ heading }: HeaderProps) {
   return (
-    <section className="w-full relative md:h-screen h-[300px] flex items-center justify-center">
+    <section className="w-full relative md:h-screen h-[300px] flex items-center justify-center overflow-hidden">
       <div className="absolute h-full w-full z-10 bg-black/80" />
       <iframe
         width="1024"
@@ -20,16 +20,8 @@ export default function Header({ heading }: HeaderProps) {
         allow="autoplay; encrypted-media;"
         // referrerpolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        className="absolute w-full h-full object-cover"
+        className="absolute w-full h-full object-cover scale-110"
       />
-
-      {/* <Image
-        src="/assets/sample.jpeg"
-        width={800}
-        height={500}
-        alt="second street hero"
-        className="absolute w-full h-full object-cover"
-      /> */}
 
       <div className="z-50">
         <Heading className="uppercase font-rock">{heading}</Heading>

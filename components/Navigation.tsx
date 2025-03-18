@@ -50,15 +50,24 @@ export default function Navigation() {
               className=""
             /> */}
           </div>
+
           <div className="web-nav w-3/4 items-center justify-end lg:flex hidden">
             {navigations?.map((nav, idx) => (
-              <Link
-                key={idx}
-                href={nav?.link}
-                className="text-white px-10 font-spicy"
-              >
-                {nav?.title}
-              </Link>
+              <li key={idx}>
+                <Link
+                  href={nav?.nav?.pLink?.link || ""}
+                  className="text-white px-10 font-spicy uppercase"
+                >
+                  {nav?.nav?.pLink?.title}
+                </Link>
+
+                {nav?.nav?.mlink &&
+                  nav?.nav?.mlink.map((mLinks, idx) => (
+                    <li key={idx}>
+                      <Link href={mLinks?.link || ""}>{mLinks?.title}</Link>
+                    </li>
+                  ))}
+              </li>
             ))}
           </div>
 
@@ -97,12 +106,12 @@ export default function Navigation() {
                 {navigations?.map((nav, idx) => (
                   <li key={idx}>
                     <Link
-                      href={nav?.link}
+                      href={nav?.nav?.pLink?.link || ""}
                       key={idx}
                       className="text-white px-2 font-spicy hover:underline transform-all duration-300 ease-linear"
                       onClick={handleSideMenu}
                     >
-                      {nav?.title}
+                      {nav?.nav?.pLink?.title}
                     </Link>
                   </li>
                 ))}

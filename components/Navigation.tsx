@@ -51,9 +51,9 @@ export default function Navigation() {
             /> */}
           </div>
 
-          <div className="web-nav w-3/4 items-center justify-end lg:flex hidden">
+          <div className="web-nav relative w-3/4 items-center justify-end lg:flex hidden">
             {navigations?.map((nav, idx) => (
-              <li key={idx}>
+              <li key={idx} className="list-none">
                 <Link
                   href={nav?.nav?.pLink?.link || ""}
                   className="text-white px-10 font-spicy uppercase"
@@ -61,12 +61,20 @@ export default function Navigation() {
                   {nav?.nav?.pLink?.title}
                 </Link>
 
-                {nav?.nav?.mlink &&
-                  nav?.nav?.mlink.map((mLinks, idx) => (
-                    <li key={idx}>
-                      <Link href={mLinks?.link || ""}>{mLinks?.title}</Link>
-                    </li>
-                  ))}
+                {nav?.nav?.mlink && (
+                  <div className="absolute bg-yellow-500 rounded-lg p-2 flex flex-col gap-2">
+                    {nav?.nav?.mlink.slice(0, 5).map((mLinks, idx) => (
+                      <li key={idx} className="list-none">
+                        <Link
+                          href={mLinks?.link || ""}
+                          className="text-white font-spicy"
+                        >
+                          {mLinks?.title}
+                        </Link>
+                      </li>
+                    ))}
+                  </div>
+                )}
               </li>
             ))}
           </div>

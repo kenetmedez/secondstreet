@@ -20,11 +20,13 @@ export default function Header({ heading }: HeaderProps) {
         allow="autoplay; encrypted-media;"
         // referrerpolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        className="absolute w-full h-full object-cover scale-110"
+        className="absolute w-full h-full object-cover scale-125"
       />
 
       <div className="z-50">
-        <Heading className="uppercase font-rock">{heading}</Heading>
+        <Heading className="uppercase font-rock pointer-events-none">
+          {heading}
+        </Heading>
         <Text></Text>
       </div>
     </section>

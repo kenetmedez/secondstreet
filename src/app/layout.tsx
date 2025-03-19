@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Lobster, Spicy_Rice, Rock_Salt } from "next/font/google";
+import { Lobster, Spicy_Rice, Rock_Salt, Work_Sans } from "next/font/google";
 import "../../styles/globals.css";
 
 const rock = Rock_Salt({
   variable: "--font-rock",
   subsets: ["latin"],
   weight: "400",
+});
+
+const work = Work_Sans({
+  variable: "--font-work",
+  subsets: ["latin"],
+  // weight: "400",
 });
 
 const lobster = Lobster({
@@ -37,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${rock.variable} ${lobster.variable} ${spicy.variable} antialiased`}
+        className={`${rock.variable} ${lobster.variable} ${spicy.variable} ${work.variable} antialiased`}
       >
         {children}
       </body>

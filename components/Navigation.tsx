@@ -14,6 +14,7 @@ export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
   const [banner, setBanner] = useState(false);
+  const [toggleMember, setToggleMember] = useState(false);
 
   const slideDownRef = useRef<HTMLLIElement>(null);
 
@@ -38,6 +39,10 @@ export default function Navigation() {
 
   const handleSlideDown = () => {
     setBanner((prev) => !prev);
+  };
+
+  const handleToggleMember = () => {
+    setToggleMember((prev) => !prev);
   };
 
   useEffect(() => {
@@ -180,14 +185,57 @@ export default function Navigation() {
               <ul className="gap-2 flex flex-col">
                 {navigations?.map((nav, idx) => (
                   <li key={idx}>
-                    <Link
-                      href={nav?.nav?.pLink?.link || ""}
-                      key={idx}
-                      className="text-white px-2 font-spicy hover:underline transform-all duration-300 ease-linear"
-                      onClick={handleSideMenu}
-                    >
-                      {nav?.nav?.pLink?.title}
-                    </Link>
+                    <p className="flex flex-row relaitve">
+                      <Link
+                        href={nav?.nav?.pLink?.link || ""}
+                        key={idx}
+                        className="text-white px-2 font-spicy hover:underline transform-all duration-300 ease-linear"
+                        onClick={handleSideMenu}
+                      >
+                        {nav?.nav?.pLink?.title}
+                      </Link>
+
+                      {nav?.nav?.mlink && (
+                        <IoMdArrowDropdown
+                          className="text-white text-2xl cursor-pointer"
+                          onClick={handleToggleMember}
+                        />
+                      )}
+                    </p>
+
+                    {nav?.nav?.mlink && toggleMember && (
+                      <div
+                        className={`relative w-full bg-black  flex flex-row gap-6 px-4 transition-all duration-700 ease-linear !z-0`}
+                      >
+                        <div className="w-full flex flex-col">
+                          <div className="space-y-1 w-full">
+                            {nav?.nav?.mlink.slice(0, 5).map((mLinks, idx) => (
+                              <p key={idx} className="hover:underline">
+                                <Link
+                                  href={mLinks?.link || ""}
+                                  className="text-white uppercase font-work font-semibold tracking-wide"
+                                >
+                                  {mLinks?.title}
+                                </Link>
+                              </p>
+                            ))}
+                          </div>
+
+                          <div className="space-y-1 w-full">
+                            {nav?.nav?.mlink.slice(5, 10).map((mLinks, idx) => (
+                              <p key={idx} className="hover:underline w-max">
+                                <Link
+                                  href={mLinks?.link || ""}
+                                  className="text-white uppercase font-work font-semibold tracking-wide"
+                                >
+                                  {mLinks?.title}
+                                </Link>
+                              </p>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </li>
                 ))}
               </ul>

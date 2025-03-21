@@ -66,7 +66,7 @@ export default function Navigation() {
       ref={slideDownRef}
     >
       {navigations && navigations.length > 1 ? (
-        <div className="w-full relative flex mx-auto flex-row items-center justify-center">
+        <div className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center">
           <div className="md:w-1/4 w-full flex items-center justify-center px-2">
             <span className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer">
               second street
@@ -116,10 +116,13 @@ export default function Navigation() {
                       />
                     </div>
 
-                    <div className="w-full flex flex-row">
-                      <div className="space-y-2 w-full">
+                    <div className="w-full flex flex-row lg:py-8">
+                      <div className="space-y-2 md:space-y-4 w-full flex flex-col items-center">
                         {nav?.nav?.mlink.slice(0, 5).map((mLinks, idx) => (
-                          <p key={idx} className="hover:underline">
+                          <p
+                            key={idx}
+                            className="hover:underline text-center w-max"
+                          >
                             <Link
                               href={mLinks?.link || ""}
                               className="text-white uppercase font-work font-semibold tracking-wide"
@@ -130,9 +133,12 @@ export default function Navigation() {
                         ))}
                       </div>
 
-                      <div className="space-y-2 w-full">
+                      <div className="space-y-2 md:space-y-4 w-full flex flex-col items-center">
                         {nav?.nav?.mlink.slice(5, 10).map((mLinks, idx) => (
-                          <p key={idx} className="hover:underline w-max">
+                          <p
+                            key={idx}
+                            className="hover:underline w-max text-center"
+                          >
                             <Link
                               href={mLinks?.link || ""}
                               className="text-white uppercase font-work font-semibold tracking-wide"

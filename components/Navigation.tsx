@@ -10,11 +10,23 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 import { navigations } from "../lib/navigation";
 
+export interface NavigationProps {
+  nav?: {
+    pLink?: {
+      title?: string;
+      link?: string;
+    };
+    mLink?: { title?: string; link?: string; img?: string }[];
+  };
+}
+
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [sideMenu, setSideMenu] = useState(false);
   const [banner, setBanner] = useState(false);
   const [toggleMember, setToggleMember] = useState(false);
+
+  const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
   const slideDownRef = useRef<HTMLLIElement>(null);
 
@@ -84,73 +96,97 @@ export default function Navigation() {
           <div className="web-nav w-3/4 items-center justify-end lg:flex hidden py-2">
             {navigations?.map((nav, idx) => (
               <li key={idx} className="list-none">
-                <p className="flex flex-row relaitve items-center justify-center !z-50">
+                <div className="flex flex-row relaitve items-center justify-center !z-50 w-full">
                   <Link
                     href={nav?.nav?.pLink?.link || ""}
-                    className={`relative text-white text-base ${nav?.nav?.mlink ? "mr-2 ml-10" : "mx-10"} font-spicy uppercase flex flex-row items-center gap-2`}
+                    className={`relative text-white text-base ${nav?.nav?.mLink ? "mr-2 ml-10" : "mx-10"} font-spicy uppercase flex flex-row items-center gap-2`}
                   >
                     {nav?.nav?.pLink?.title}{" "}
                   </Link>
 
-                  {nav?.nav?.mlink && (
+                  {nav?.nav?.mLink && (
                     <IoMdArrowDropdown
                       className="text-white text-2xl cursor-pointer"
                       onClick={handleSlideDown}
                     />
                   )}
-                </p>
 
-                {/* {nav?.nav?.mlink && banner && ( */}
-                {nav?.nav?.mlink && (
-                  <div
-                    className={`absolute ${banner ? "translate-y-0 block" : "-translate-y-16 hidden"} top-12 right-0 pt-4 w-full bg-black  flex flex-row gap-6 p-4 transition-all duration-700 ease-linear !z-0`}
-                  >
-                    <div className="w-full bg-gray-100">
-                      <Image
-                        src="/assets/logo.jpg"
-                        width={50}
-                        height={50}
-                        alt={"second street logo"}
-                        quality={100}
-                        className="bg-white"
-                      />
-                    </div>
+                  {nav?.nav?.mLink && (
+                    <div
+                      className={`absolute ${banner ? "translate-y-0 block" : "-translate-y-16 hidden"}  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-700 ease-linear z-0 px-6 pb-6`}
+                    >
+                      {hoveredMember !== null ? (
+                        <div className="w-1/2 bg-black p-0 m-0">
+                          {nav?.nav?.mLink[hoveredMember]?.img && (
+                            <Image
+                              src={
+                                nav?.nav?.mLink[hoveredMember]?.img ||
+                                "/assets/logo.jpg"
+                              }
+                              width={500}
+                              height={500}
+                              alt={
+                                nav?.nav?.mLink[hoveredMember]?.title ||
+                                "Second Street Member"
+                              }
+                              quality={100}
+                              className={`w-full ${hoveredMember !== null ? "scale-x-100" : "scale-x-0"} transition origin-right duration-300 ease-linear`}
+                            />
+                          )}
+                        </div>
+                      ) : (
+                        <div className="w-1/2 m-0 p-0">
+                          <Image
+                            src={"/assets/logo.jpg"}
+                            width={500}
+                            height={500}
+                            alt={"second street logo"}
+                            quality={100}
+                            className="bg-white w-full"
+                          />
+                        </div>
+                      )}
 
-                    <div className="w-full flex flex-row lg:py-8">
-                      <div className="space-y-2 md:space-y-4 w-full flex flex-col items-center">
-                        {nav?.nav?.mlink.slice(0, 5).map((mLinks, idx) => (
-                          <p
-                            key={idx}
-                            className="hover:underline text-center w-max"
-                          >
-                            <Link
-                              href={mLinks?.link || ""}
-                              className="text-white uppercase font-work font-semibold tracking-wide"
+                      <div className="w-full flex flex-row lg:py-8">
+                        <div className="w-full flex flex-col items-center space-y-2 md:space-y-4">
+                          {nav?.nav?.mLink.slice(0, 5).map((mLinks, idx) => (
+                            <p
+                              key={idx}
+                              className="hover:underline text-center w-max"
                             >
-                              {mLinks?.title}
-                            </Link>
-                          </p>
-                        ))}
-                      </div>
+                              <Link
+                                href={mLinks?.link || ""}
+                                className={`${hoveredMember === idx ? "text-yellow-500 font-rock text-xl animate-ping" : "text-white font-work"}  uppercase font-semibold tracking-wide`}
+                                onMouseLeave={() => setHoveredMember(idx)}
+                                onMouseEnter={() => setHoveredMember(idx)}
+                              >
+                                {mLinks?.title}
+                              </Link>
+                            </p>
+                          ))}
+                        </div>
 
-                      <div className="space-y-2 md:space-y-4 w-full flex flex-col items-center">
-                        {nav?.nav?.mlink.slice(5, 10).map((mLinks, idx) => (
-                          <p
-                            key={idx}
-                            className="hover:underline w-max text-center"
-                          >
-                            <Link
-                              href={mLinks?.link || ""}
-                              className="text-white uppercase font-work font-semibold tracking-wide"
+                        <div className="w-full flex flex-col items-center space-y-2 md:space-y-4">
+                          {nav?.nav?.mLink.slice(5, 10).map((mLinks, idx) => (
+                            <p
+                              key={idx}
+                              className="hover:underline w-max text-center"
                             >
-                              {mLinks?.title}
-                            </Link>
-                          </p>
-                        ))}
+                              <Link
+                                href={mLinks?.link || ""}
+                                className={`${hoveredMember === idx + 5 ? "text-yellow-500 font-rock text-xl animate-ping" : "text-white font-work"}  uppercase font-semibold tracking-wide`}
+                                onMouseLeave={() => setHoveredMember(idx + 5)}
+                                onMouseEnter={() => setHoveredMember(idx + 5)}
+                              >
+                                {mLinks?.title}
+                              </Link>
+                            </p>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </li>
             ))}
           </div>
@@ -201,7 +237,7 @@ export default function Navigation() {
                         {nav?.nav?.pLink?.title}
                       </Link>
 
-                      {nav?.nav?.mlink && (
+                      {nav?.nav?.mLink && (
                         <IoMdArrowDropdown
                           className="text-white text-2xl cursor-pointer"
                           onClick={handleToggleMember}
@@ -209,13 +245,13 @@ export default function Navigation() {
                       )}
                     </p>
 
-                    {nav?.nav?.mlink && toggleMember && (
+                    {nav?.nav?.mLink && toggleMember && (
                       <div
                         className={`relative w-full bg-black  flex flex-row gap-6 px-4 transition-all duration-700 ease-linear !z-0`}
                       >
                         <div className="w-full flex flex-col">
                           <div className="space-y-1 w-full">
-                            {nav?.nav?.mlink.slice(0, 5).map((mLinks, idx) => (
+                            {nav?.nav?.mLink?.slice(0, 5).map((mLinks, idx) => (
                               <p key={idx} className="hover:underline">
                                 <Link
                                   href={mLinks?.link || ""}
@@ -228,16 +264,18 @@ export default function Navigation() {
                           </div>
 
                           <div className="space-y-1 w-full">
-                            {nav?.nav?.mlink.slice(5, 10).map((mLinks, idx) => (
-                              <p key={idx} className="hover:underline w-max">
-                                <Link
-                                  href={mLinks?.link || ""}
-                                  className="text-white uppercase font-work font-semibold tracking-wide"
-                                >
-                                  {mLinks?.title}
-                                </Link>
-                              </p>
-                            ))}
+                            {nav?.nav?.mLink
+                              ?.slice(5, 10)
+                              .map((mLinks, idx) => (
+                                <p key={idx} className="hover:underline w-max">
+                                  <Link
+                                    href={mLinks?.link || ""}
+                                    className="text-white uppercase font-work font-semibold tracking-wide"
+                                  >
+                                    {mLinks?.title}
+                                  </Link>
+                                </p>
+                              ))}
                           </div>
                         </div>
                       </div>

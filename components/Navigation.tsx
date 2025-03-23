@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { GrClose } from "react-icons/gr";
-import { IoMdArrowDropdown } from "react-icons/io";
+import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 
 import { navigations } from "../lib/navigation";
 
@@ -28,16 +28,26 @@ export default function Navigation() {
 
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
-  const slideDownRef = useRef<HTMLLIElement>(null);
+  const slideDownRef = useRef<HTMLDivElement>(null);
   const sideBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (
-        !slideDownRef.current?.contains(event.target as Node) ||
-        !sideBarRef.current?.contains(event.target as Node)
-      ) {
+      if (!slideDownRef.current?.contains(event.target as Node)) {
         setBanner(false);
+      }
+    }
+
+    document.body.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (!sideBarRef.current?.contains(event.target as Node)) {
         setSideMenu(false);
       }
     }
@@ -55,6 +65,7 @@ export default function Navigation() {
 
   const handleSlideDown = () => {
     setBanner((prev) => !prev);
+    console.log("banner click");
   };
 
   const handleToggleMember = () => {
@@ -79,22 +90,16 @@ export default function Navigation() {
     <section
       className={`fixed ${scrolled || banner ? "bg-black" : "bg-transparent hover:bg-black"} py-8 top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out
       `}
-      ref={slideDownRef}
     >
       {navigations && navigations.length > 1 ? (
         <div className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center">
           <div className="md:w-1/4 w-full flex items-center justify-center px-2">
-            <span className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer">
+            <Link
+              href="/"
+              className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer"
+            >
               second street
-            </span>
-            {/* <Image
-              src="/assets/logo.jpg"
-              width={50}
-              height={50}
-              alt={"second street logo"}
-              quality={100}
-              className=""
-            /> */}
+            </Link>
           </div>
 
           <div className="web-nav w-3/4 items-center justify-end lg:flex hidden py-2">
@@ -109,10 +114,13 @@ export default function Navigation() {
                   </Link>
 
                   {nav?.nav?.mLink && (
-                    <IoMdArrowDropdown
-                      className="text-white text-2xl cursor-pointer"
-                      onClick={handleSlideDown}
-                    />
+                    <div onClick={handleSlideDown}>
+                      {banner ? (
+                        <IoMdArrowDropup className="text-white text-2xl cursor-pointer" />
+                      ) : (
+                        <IoMdArrowDropdown className="text-white text-2xl cursor-pointer" />
+                      )}
+                    </div>
                   )}
 
                   {nav?.nav?.mLink && (
@@ -195,7 +203,7 @@ export default function Navigation() {
             ))}
           </div>
 
-          <div className="mobile-nav relative lg:w-3/4 w-full lg:hidden flex items-center justify-end px-4">
+          <div className="humberger-icon relative lg:w-3/4 w-full lg:hidden flex items-center justify-end px-4">
             <span className="text-white">
               <IoReorderThreeOutline
                 size={25}

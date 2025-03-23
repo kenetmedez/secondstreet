@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lobster, Spicy_Rice, Rock_Salt, Work_Sans } from "next/font/google";
 import "../../styles/globals.css";
+import Navigation from "../../components/Navigation";
 
 const rock = Rock_Salt({
   variable: "--font-rock",
@@ -45,6 +46,7 @@ export default function RootLayout({
       <body
         className={`${rock.variable} ${lobster.variable} ${spicy.variable} ${work.variable} antialiased`}
       >
+        <Navigation />
         {children}
       </body>
     </html>

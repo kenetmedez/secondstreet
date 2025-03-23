@@ -28,12 +28,13 @@ export default function Navigation() {
 
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
-  const slideDownRef = useRef<HTMLLIElement>(null);
+  const slideDownRef = useRef<HTMLLIElement | HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (!slideDownRef.current?.contains(event.target as Node)) {
         setBanner(false);
+        setSideMenu(false);
         console.log("click");
       }
     }
@@ -78,7 +79,10 @@ export default function Navigation() {
       ref={slideDownRef}
     >
       {navigations && navigations.length > 1 ? (
-        <div className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center">
+        <div
+          className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center"
+          ref={slideDownRef}
+        >
           <div className="md:w-1/4 w-full flex items-center justify-center px-2">
             <span className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer">
               second street
@@ -115,9 +119,6 @@ export default function Navigation() {
                     <div
                       className={`absolute ${banner ? "scale-y-100" : "scale-y-0"} origin-top  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-300 ease-linear z-0 px-6 pb-6`}
                     >
-                      {/* <div
-                      className={`absolute ${banner ? "translate-y-0 block" : "-translate-y-16 hidden"}  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-700 ease-linear z-0 px-6 pb-6`}
-                    > */}
                       {hoveredMember !== null ? (
                         <div className="w-1/2 bg-black p-0 m-0">
                           {nav?.nav?.mLink[hoveredMember]?.img && (
@@ -207,7 +208,7 @@ export default function Navigation() {
           {/* Sidebar */}
 
           <div
-            className={`absolute md:flex lg:hidden flex-col top-0 -right-96 bg-black h-screen min-w-[300px] p-4 z-50 gap-4 transition-all duration-300 ease-in-out ${sideMenu ? "scale-100 right-0" : "scale-0"}`}
+            className={`absolute origin-right md:flex lg:hidden flex-col top-0 -right-96 bg-black h-screen min-w-[300px] p-4 z-50 gap-4 transition-all duration-500 ease-in-out ${sideMenu ? "scale-x-100 right-0" : "scale-x-0"}`}
           >
             <div className="p-2">
               <GrClose
@@ -258,7 +259,7 @@ export default function Navigation() {
                               <p key={idx} className="hover:underline">
                                 <Link
                                   href={mLinks?.link || ""}
-                                  className="text-white uppercase font-work font-semibold tracking-wide"
+                                  className="text-white uppercase font-work font-semibold tracking-wide text-sm opacity-70 hover:opacity-100"
                                 >
                                   {mLinks?.title}
                                 </Link>
@@ -273,7 +274,7 @@ export default function Navigation() {
                                 <p key={idx} className="hover:underline w-max">
                                   <Link
                                     href={mLinks?.link || ""}
-                                    className="text-white uppercase font-work font-semibold tracking-wide"
+                                    className="text-white uppercase font-work font-semibold tracking-wide text-sm opacity-70 hover:opacity-100"
                                   >
                                     {mLinks?.title}
                                   </Link>

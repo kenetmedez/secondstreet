@@ -32,7 +32,7 @@ const Header: React.FC<HeaderProps> = ({
       <div className={className}>
         <Heading className={className}>{title}</Heading>
         {subtitle && <span className="">{subtitle}</span>}
-        {description && <Text text={description} />}
+        {description && <Text>{description}</Text>}
       </div>
       {btn && <div>{btn}</div>}
     </section>

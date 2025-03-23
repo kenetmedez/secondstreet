@@ -28,14 +28,17 @@ export default function Navigation() {
 
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
-  const slideDownRef = useRef<HTMLLIElement | HTMLDivElement>(null);
+  const slideDownRef = useRef<HTMLLIElement>(null);
+  const sideBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
-      if (!slideDownRef.current?.contains(event.target as Node)) {
+      if (
+        !slideDownRef.current?.contains(event.target as Node) ||
+        !sideBarRef.current?.contains(event.target as Node)
+      ) {
         setBanner(false);
         setSideMenu(false);
-        console.log("click");
       }
     }
 
@@ -79,10 +82,7 @@ export default function Navigation() {
       ref={slideDownRef}
     >
       {navigations && navigations.length > 1 ? (
-        <div
-          className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center"
-          ref={slideDownRef}
-        >
+        <div className="w-full relative flex mx-auto max-w-[1500px] flex-row items-center justify-center">
           <div className="md:w-1/4 w-full flex items-center justify-center px-2">
             <span className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer">
               second street
@@ -227,7 +227,7 @@ export default function Navigation() {
               </Link>
             </div>
 
-            <div className="w-full">
+            <div className="w-full" ref={sideBarRef}>
               <ul className="gap-2 flex flex-col">
                 {navigations?.map((nav, idx) => (
                   <li key={idx}>

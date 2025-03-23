@@ -113,8 +113,11 @@ export default function Navigation() {
 
                   {nav?.nav?.mLink && (
                     <div
-                      className={`absolute ${banner ? "translate-y-0 block" : "-translate-y-16 hidden"}  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-700 ease-linear z-0 px-6 pb-6`}
+                      className={`absolute ${banner ? "scale-y-100" : "scale-y-0"} origin-top  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-300 ease-linear z-0 px-6 pb-6`}
                     >
+                      {/* <div
+                      className={`absolute ${banner ? "translate-y-0 block" : "-translate-y-16 hidden"}  top-12 left-1/2 transform -translate-x-1/2 2xl:w-full w-[80%] bg-black flex flex-row items-center transition-all duration-700 ease-linear z-0 px-6 pb-6`}
+                    > */}
                       {hoveredMember !== null ? (
                         <div className="w-1/2 bg-black p-0 m-0">
                           {nav?.nav?.mLink[hoveredMember]?.img && (

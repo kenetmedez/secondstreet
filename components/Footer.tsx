@@ -1,23 +1,29 @@
 "use-client";
 
 import Link from "next/link";
+import Image from "next/image";
 import React from "react";
 import { navigations } from "../lib/navigation";
 
 export default function Footer() {
   return (
     <section className="py-2 bg-black ">
-      <div className="max-w-[1500px] mx-auto">
+      <div className="max-w-[1200px] mx-auto flex items-center justify-center">
         <div className="md:w-1/4 w-full flex items-center justify-center px-2">
           <Link
             href="/"
             className="lg:text-3xl text-xl text-yellow-500 text-center font-lobster cursor-pointer"
           >
-            second street
+            <Image
+              src="/assets/logo.jpg"
+              width={500}
+              height={500}
+              alt="second street logo"
+            />
           </Link>
         </div>
 
-        <div className="web-nav w-3/4 items-center justify-end lg:flex hidden">
+        <div className="web-nav w-3/4 items-center justify-center lg:flex hidden">
           {navigations?.map((nav, idx) => (
             <li key={idx} className="list-none">
               <div className="flex flex-row relaitve items-center justify-center !z-50 w-full">

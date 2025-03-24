@@ -3,15 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "concurrently \"next dev\" \"sanity dev\"",
+    "build": "dotenv -- next build && dotenv -- sanity build",
+    "start": "concurrently \"next start\" \"sanity start\"",
+    "lint": "next lint",
+    "dev:site": "next dev",
+    "dev:sanity": "sanity dev"
   },
   "dependencies": {
     "@sanity/icons": "^3.7.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.77.2",
+    "concurrently": "^9.1.2",
     "next": "15.2.0",
     "next-sanity": "^9.8.60",
     "react": "^19.0.0",

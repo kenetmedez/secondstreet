@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lobster, Spicy_Rice, Rock_Salt, Work_Sans } from "next/font/google";
 import "../../styles/globals.css";
 import Navigation from "../../components/Navigation";
+import Footer from "../../components/Footer";
 
 const rock = Rock_Salt({
   variable: "--font-rock",
@@ -48,6 +49,7 @@ export default function RootLayout({
       >
         <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

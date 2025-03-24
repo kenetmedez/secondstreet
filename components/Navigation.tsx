@@ -88,7 +88,7 @@ export default function Navigation() {
 
   return (
     <section
-      className={`fixed ${scrolled || banner ? "bg-black" : "bg-transparent hover:bg-black"} py-8 top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out
+      className={`fixed ${scrolled || banner ? "bg-black" : "bg-transparent hover:bg-black"} md:py-8 top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out
       `}
     >
       {navigations && navigations.length > 1 ? (
@@ -102,7 +102,7 @@ export default function Navigation() {
             </Link>
           </div>
 
-          <div className="web-nav w-3/4 items-center justify-end lg:flex hidden py-2">
+          <div className="web-nav w-3/4 items-center justify-end lg:flex hidden">
             {navigations?.map((nav, idx) => (
               <li key={idx} className="list-none">
                 <div className="flex flex-row relaitve items-center justify-center !z-50 w-full">

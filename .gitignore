@@ -17,6 +17,7 @@
 /.next/
 /out/
 
+
 # production
 /build
 
@@ -32,8 +33,10 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
-.sanity*
-.next*
+/.sanity*
+/.next*
+/dist
+
 
 # vercel
 .vercel
@@ -41,3 +44,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+# asdasd

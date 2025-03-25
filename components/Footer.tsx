@@ -23,19 +23,39 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div className="web-nav w-3/4 items-center justify-center lg:flex hidden">
-          {navigations?.map((nav, idx) => (
-            <li key={idx} className="list-none">
-              <div className="flex flex-row relaitve items-center justify-center !z-50 w-full">
-                <Link
-                  href={nav?.nav?.pLink?.link || ""}
-                  className={`relative text-white text-base ${nav?.nav?.mLink ? "mr-2 ml-10" : "mx-10"} font-spicy uppercase flex flex-row items-center gap-2`}
-                >
-                  {nav?.nav?.pLink?.title}{" "}
-                </Link>
+        <div className="web-nav w-3/4 items-center justify-center flex flex-row">
+          <div>
+            {navigations?.length > 1 && (
+              <div className="">
+                <span className="uppercase text-yellow-400">quick links</span>
               </div>
-            </li>
-          ))}
+            )}
+            {navigations?.map((nav, idx) => (
+              <li key={idx} className="list-none">
+                <div className="relaitve !z-50 w-full">
+                  <Link
+                    href={nav?.nav?.pLink?.link || ""}
+                    className={`relative text-white text-base ${nav?.nav?.mLink ? "mr-2 ml-10" : "mx-10"} font-spicy uppercase flex flex-row items-center gap-2`}
+                  >
+                    {nav?.nav?.pLink?.title}{" "}
+                  </Link>
+                </div>
+
+                {/* {nav?.nav?.mLink && (
+                  <div>
+                    {nav?.nav?.mLink?.map((mLinks, idx) => (
+                      <div key={idx}>
+                        <Link href={mLinks?.link}>{mLinks?.title}</Link>
+                      </div>
+                    ))}
+                  </div>
+                )} */}
+              </li>
+            ))}
+          </div>
+          <div>
+            <span>member</span>
+          </div>
         </div>
       </div>
     </section>

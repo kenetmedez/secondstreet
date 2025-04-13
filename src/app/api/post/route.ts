@@ -5,12 +5,8 @@ import { POSTS_QUERY } from "../query";
 export async function GET() {
   try {
     const documents = await client.fetch(POSTS_QUERY);
-
-    console.log("docs", documents)
     return NextResponse.json({ documents });
-  } catch (error) {
-    const message =
-    error instanceof Error ? error.message : "Unknown server error";
-  return NextResponse.json({ message }, { status: 500 });
+  } catch  {
+  return NextResponse.json({ message: "Fail fetching posts" }, { status: 500 });
   }
 }

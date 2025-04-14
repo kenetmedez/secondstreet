@@ -6,6 +6,9 @@ import Navigation from "../../components/Navigation";
 import Image from "next/image";
 import { Post } from "../../types";
 import { urlFor } from "@/sanity/lib/image";
+import Container from "../../ui/container";
+import Grid from "../../ui/grid";
+import Heading from "../../ui/heading";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -38,21 +41,30 @@ export default function Home() {
           {posts.length === 0 ? (
             <p>No posts found.</p>
           ) : (
-            <ul className="space-y-4">
-              {posts.map((post) => (
-                <li key={post._id} className="p-4">
-                  <h2 className="text-lg font-semibold">{post.title}</h2>
-                  <Image
-                    src={urlFor(post.mainImage).width(800).height(500).url()}
-                    alt={post.title}
-                    width={800}
-                    height={500}
-                    property="true"
-                    quality={100}
-                  />
-                </li>
-              ))}
-            </ul>
+            <Container>
+              <Grid>
+                {posts.map((post) => (
+                  <div key={post._id} className="p-4">
+                    <Image
+                      src={urlFor(post.mainImage).width(800).height(500).url()}
+                      alt={post.title}
+                      width={800}
+                      height={500}
+                      property="true"
+                      quality={100}
+                      className="rounded mb-2"
+                    />
+
+                    <Heading
+                      type="h2"
+                      className="!text-lg font-sans !text-black !font-semibold"
+                    >
+                      {post.title}
+                    </Heading>
+                  </div>
+                ))}
+              </Grid>
+            </Container>
           )}
         </div>
       </div>

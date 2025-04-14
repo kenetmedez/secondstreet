@@ -9,6 +9,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Container from "../../ui/container";
 import Grid from "../../ui/grid";
 import Heading from "../../ui/heading";
+import Text from "../../ui/text";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -20,6 +21,8 @@ export default function Home() {
       .then((data) => setPosts(data.documents))
       .catch((err) => setError(err.message));
   }, []);
+
+  console.log(posts);
 
   if (error) return <p>Error: {error}</p>;
 
@@ -57,10 +60,14 @@ export default function Home() {
 
                     <Heading
                       type="h2"
-                      className="!text-lg font-sans !text-black !font-semibold"
+                      className="!text-xl font-sans !text-black !font-semibold"
                     >
                       {post.title}
                     </Heading>
+
+                    <Text className="!text-sm !text-black !font-sans !text-left">
+                      {post?.excerpt}
+                    </Text>
                   </div>
                 ))}
               </Grid>

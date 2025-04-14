@@ -11,12 +11,12 @@ const Heading: React.FC<HeadingProps> = ({ children, className, type }) => {
     <>
       {type === "h1" ? (
         <h1
-          className={`md:text-7xl text-3xl text-yellow-400 text-center leading-normal ${className}`}
+          className={`md:text-7xl text-3xl text-yellow-400 text-center leading-normal mb-2 ${className}`}
         >
           {children}
         </h1>
       ) : type === "h2" ? (
-        <h2>{children}</h2>
+        <h2 className={`${className}`}>{children}</h2>
       ) : (
         ""
       )}

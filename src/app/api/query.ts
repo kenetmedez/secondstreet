@@ -4,6 +4,7 @@ export const POSTS_QUERY = `*[
   _id,
   title,
   slug,
+  excerpt,
   publishedAt,
   author,
   mainImage {

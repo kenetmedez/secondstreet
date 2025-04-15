@@ -10,7 +10,7 @@ export default function Footer() {
   const pathname = usePathname();
   return (
     <section
-      className={`py-2 bg-black ${pathname.includes("studio") ? "hidden" : "block"}`}
+      className={`py-2 bg-black ${pathname.includes("studio") || pathname.includes("monthsary") ? "hidden" : "block"}`}
     >
       <div className="max-w-[1200px] mx-auto flex items-center justify-center">
         <div className="md:w-1/4 w-full flex items-center justify-center px-2">

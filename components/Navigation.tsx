@@ -91,7 +91,7 @@ export default function Navigation() {
 
   return (
     <section
-      className={`fixed ${scrolled || banner ? "bg-black" : "bg-transparent hover:bg-black"} ${pathname.includes("studio") ? "hidden" : "block"}  md:py-8 top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out
+      className={`fixed ${scrolled || banner ? "bg-black" : "bg-transparent hover:bg-black"} ${pathname.includes("studio") || pathname.includes("monthsary") ? "hidden" : "block"}  md:py-8 top-0 z-[999] w-full !mx-auto h-[40px] flex items-center justify-center duration-300 transition-all ease-in-out
       `}
     >
       {navigations && navigations.length > 1 ? (
